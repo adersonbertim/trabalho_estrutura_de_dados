@@ -4,4 +4,4 @@
 
 Prof. Bruno Siqueira
 
-Grupo: Abilio Goulart, Aderson Bertim, Régis da Silva, Thilber Falcão, Guilherme Zinelli
+Grupo: Aderson Bertim, Régis da Silva, Thilber Falcão, Guilherme Zinelli
