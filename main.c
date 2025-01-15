@@ -51,26 +51,33 @@ Perfil criarPerfil() {
 }
 
 // Função para adicionar um post. Verifica se a pilha de postagens está cheia antes de adicionar.
-Posts adicionarPost(Posts p){
+Posts adicionarPost(Posts p) {
     if (p.topo >= MAX) { // Verifica se a pilha de postagens atingiu o limite.
         printf("Limite de posts alcançado\n");
         return p;
     }
 
     int postvalido = 0;
-    while (!postvalido){
-        printf("Escreva o post: \n");
-        scanf(" %50s", p.postagens[p.topo]); // Limita o post a 50 caracteres para evitar buffer overflow.
-        getchar();
+    while (!postvalido) {
+        printf("Escreva o post (até 50 caracteres): \n");
+        fgets(p.postagens[p.topo], 51, stdin); // Lê a string com espaços e até 50 caracteres.
+        
+        size_t len = strlen(p.postagens[p.topo]);
+        if (len > 0 && p.postagens[p.topo][len - 1] == '\n') {
+            p.postagens[p.topo][len - 1] = '\0'; // Remove o caractere de nova linha, se presente.
+            len--; // Ajusta o tamanho para refletir a remoção do '\n'.
+        }
 
-        if (strlen(p.postagens[p.topo]) > 50){
-            printf("O post deve conter no máximo 50 caracteres\n");
+        if (len == 0) {
+            printf("O post nao pode estar vazio. Tente novamente.\n");
+        } else if (len > 50) {
+            printf("O post excedeu o limite de 50 caracteres. Tente novamente.\n");
         } else {
-            postvalido = 1;
+            postvalido = 1; // Post válido, sai do loop.
         }
     }
 
-    p.topo++; // Incrementa o topo após adicionar o post.
+    p.topo++; // Incrementa o topo após adicionar o post válido.
     return p;
 }
 
