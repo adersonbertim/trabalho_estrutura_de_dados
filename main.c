@@ -9,7 +9,7 @@ typedef struct {
     char postagens[MAX][51]; 
     // Armazena as postagens, com limite de 50 caracteres por post.
     int topo; 
-    // Indica a posição atual na pilha de postagens.
+    // Indica a posição atual na pilha de ostagens.
 } Posts;
 
 // Cada perfil possui nome, senha e uma pilha de postagens associada.
@@ -81,10 +81,11 @@ Posts adicionarPost(Posts p) {
     return p;
 }
 
+
 // Função para remover o último post. Se a pilha estiver vazia, não faz nada.
 Posts removerPost(Posts p) {
     if (p.topo <= 0){ // Verifica se a pilha de postagens está vazia.
-        printf("Não há posts para remover.\n");
+        printf("Nao ha posts para remover.\n");
         return p;
     }
 
@@ -132,11 +133,11 @@ int escolherPerfil(Perfil perfis[], int totalPerfis){
     }
 
     int escolha;
-    printf("\nDigite o número do perfil: ");
+    printf("\nDigite o numero do perfil: ");
     scanf(" %d", &escolha);
     getchar();
     if (escolha < 1 || escolha > totalPerfis){ // Valida a escolha.
-        printf("Opção inválida\n");
+        printf("Opcao invalida\n");
         return -1; 
     }
 
@@ -187,7 +188,7 @@ int main() {
             case 3: {
                 int indicePerfil = escolherPerfil(perfis, perfilAtual);
                 if (indicePerfil == -1) {
-                    printf("\nNão foi possível selecionar um perfil.\n");
+                    printf("\nNao foi possivel selecionar um perfil.\n");
                     continue;
                 }
 
@@ -199,8 +200,8 @@ int main() {
                 // Fluxo para o usuário adicionar ou excluir posts.
                 while (1) {
                     if (postsEstaoCheios(perfis[indicePerfil].postagens)) {
-                        printf("Não é possível adicionar mais posts.\n");
-                        printf("\nDeseja excluir o último post para postar de novo? (s/n): ");
+                        printf("Nao e possivel adicionar mais posts.\n");
+                        printf("\nDeseja excluir o ultimo post para postar de novo? (s/n): ");
                         scanf(" %c", &resposta);
                         getchar();
                         if (resposta == 's' || resposta == 'S') {
@@ -219,7 +220,7 @@ int main() {
 
                 // Opção de excluir o último post.
                 if (!postsEstaoCheios(perfis[indicePerfil].postagens)) {
-                    printf("\nDeseja excluir o último post? (S/N): ");
+                    printf("\nDeseja excluir o ultimo post? (S/N): ");
                     scanf(" %c", &resposta);
                     getchar();
                     if (resposta == 's' || resposta == 'S') {
@@ -231,7 +232,7 @@ int main() {
 
             case 4:
                 if (perfilAtual == 0) {
-                    printf("\nNão há perfis cadastrados.\n");
+                    printf("\nNao ha perfis cadastrados.\n");
                 } else {
                     int resposta;
                     printf("\nDeseja ver os posts de qual perfil? ");
@@ -241,13 +242,13 @@ int main() {
                     if (resposta >= 1 && resposta <= perfilAtual) {
                         mostrarPosts(perfis[resposta - 1].postagens);
                     } else {
-                        printf("Opção inválida.\n");
+                        printf("Opçao invalida.\n");
                     }
                 }
                 break;
 
             default:
-                printf("Opção inválida.\n");
+                printf("Opçao invalida.\n");
                 break;
         }
     }
