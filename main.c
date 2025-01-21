@@ -27,28 +27,49 @@ Posts inicializarPosts() {
 }
 
 // Função para criar um perfil. Solicita o nome e a senha do usuário.
-Perfil criarPerfil() {
+Perfil criarPerfil(Perfil perfis[], int totalPerfis) {
     Perfil p;
-    printf("Digite o nome do perfil: ");
-    scanf(" %s", p.nome);
-    getchar();
+    while (1) {
+        printf("Digite o nome do perfil: ");
+        scanf(" %s", p.nome);
+        getchar();
 
-    // A senha deve ter exatamente 8 dígitos. Se não for válida, solicita novamente.
+        // Verifica se o nome já existe
+        if (nomerepetido(perfis, totalPerfis, p.nome)) {
+            printf("Já existe um usuário com este nome. Tente outro nome.\n");
+        } else {
+            break; // Sai do loop se o nome for único
+        }
+    }
+
+    // Validação da senha
     int senhaValida = 0;
-    while (!senhaValida){
+    while (!senhaValida) {
         printf("Digite sua senha (8 digitos): ");
         scanf(" %s", p.senha);
         getchar();
-        if (strlen(p.senha) == 8){
+        if (strlen(p.senha) == 8) {
             senhaValida = 1;
         } else {
             printf("A senha deve conter exatamente 8 caracteres\n");
         }
     }
 
-    p.postagens = inicializarPosts(); // Inicializa a pilha de postagens.
+    p.postagens = inicializarPosts();
     return p;
 }
+
+
+
+int nomerepetido(Perfil perfis[], int totalPerfis, char nome[]) {
+    for (int i = 0; i < totalPerfis; i++) {
+        if (strcmp(perfis[i].nome, nome) == 0) {  // Compara o nome com os nomes dos perfis existentes.
+            return 1;  // Retorna 1 se o nome já existe.
+        }
+    }
+    return 0;  // Retorna 0 se o nome não existe.
+}
+
 
 // Função para adicionar um post. Verifica se a pilha de postagens está cheia antes de adicionar.
 Posts adicionarPost(Posts p) {
@@ -174,13 +195,14 @@ int main() {
 
         switch (opcao) {
             case 1:
-                if (perfilAtual >= MAX) {
-                    printf("Limite de perfis atingido.\n");
-                    break;
-                }
-                perfis[perfilAtual] = criarPerfil(); // Cria o perfil e o armazena.
-                perfilAtual++; // Incrementa o índice para o próximo perfil.
+            if (perfilAtual >= MAX) {
+                printf("Limite de perfis atingido.\n");
                 break;
+            }
+            perfis[perfilAtual] = criarPerfil(perfis, perfilAtual); // Passa o array e o total de perfis
+            perfilAtual++;
+            break;
+
 
             case 2:
                 return 0; // Encerra o programa.
