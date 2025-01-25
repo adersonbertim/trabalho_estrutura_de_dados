@@ -26,6 +26,15 @@ Posts inicializarPosts() {
     return p;
 }
 
+int nomerepetido(Perfil perfis[], int totalPerfis, char nome[]) {
+    for (int i = 0; i < totalPerfis; i++) {
+        if (strcmp(perfis[i].nome, nome) == 0) {  // Compara o nome com os nomes dos perfis existentes.
+            return 1;  // Retorna 1 se o nome já existe.
+        }
+    }
+    return 0;  // Retorna 0 se o nome não existe.
+}
+
 // Função para criar um perfil. Solicita o nome e a senha do usuário.
 Perfil criarPerfil(Perfil perfis[], int totalPerfis) {
     Perfil p;
@@ -58,18 +67,6 @@ Perfil criarPerfil(Perfil perfis[], int totalPerfis) {
     p.postagens = inicializarPosts();
     return p;
 }
-
-
-
-int nomerepetido(Perfil perfis[], int totalPerfis, char nome[]) {
-    for (int i = 0; i < totalPerfis; i++) {
-        if (strcmp(perfis[i].nome, nome) == 0) {  // Compara o nome com os nomes dos perfis existentes.
-            return 1;  // Retorna 1 se o nome já existe.
-        }
-    }
-    return 0;  // Retorna 0 se o nome não existe.
-}
-
 
 // Função para adicionar um post. Verifica se a pilha de postagens está cheia antes de adicionar.
 Posts adicionarPost(Posts p) {
