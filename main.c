@@ -224,6 +224,8 @@ int main() {
                     continue;
                 }
 
+                limparTela();
+
                 // Fluxo para o usuário adicionar ou excluir posts.
                 while (1) {
                     if (postsEstaoCheios(perfis[indicePerfil].postagens)) {
