@@ -179,6 +179,13 @@ int verificarsenha(char senha[]){
         return 0; 
     }
 }
+void limparTela(){
+    #ifdef _WIN32
+    system("cls"); // Limpar tela no Windows
+    #else
+    system("clear");  //Limpar tela no Linux ou MacOS
+    #endif
+}
 
 int main() {
     Perfil perfis[MAX]; // Array para armazenar os perfis.
@@ -198,6 +205,7 @@ int main() {
             }
             perfis[perfilAtual] = criarPerfil(perfis, perfilAtual); // Passa o array e o total de perfis
             perfilAtual++;
+            limparTela();
             break;
 
 
